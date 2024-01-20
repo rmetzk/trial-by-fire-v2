@@ -40,39 +40,51 @@
 </section>
 
 <script>
-    console.log('hello')
-    document.addEventListener('DOMContentLoaded', loadArticles); // Load articles when the page is ready
+    let articleId = 0; // Initialize a global variable for article IDs
+
+    document.addEventListener('DOMContentLoaded', loadArticles);
 
     document.getElementById('new-article-form').addEventListener('submit', function(event) {
         event.preventDefault();
-
         var title = document.getElementById('title').value;
         var content = document.getElementById('content').value;
-
-        addArticle(title, content);
-        saveArticleToStorage(title, content);
-
+        addArticle(title, content, articleId);
+        saveArticleToStorage(title, content, articleId);
+        articleId++; // Increment the ID for the next article
         document.getElementById('title').value = '';
         document.getElementById('content').value = '';
     });
 
-    function addArticle(title, content) {
+    function addArticle(title, content, id) {
         var article = document.createElement('article');
-        article.innerHTML = '<h2 class="red-heading">' + title + '</h2><p>' + content + '</p>';
+        article.innerHTML = '<h2 class="red-heading">' + title + '</h2><p>' + content + '</p><button class="delete-btn" data-id="' + id + '">Delete</button>';
+        article.querySelector('.delete-btn').addEventListener('click', function() {
+            deleteArticle(this.dataset.id, article);
+        });
         document.getElementById('blog-articles').appendChild(article);
     }
 
-    function saveArticleToStorage(title, content) {
+    function saveArticleToStorage(title, content, id) {
         var articles = JSON.parse(localStorage.getItem('articles')) || [];
-        articles.push({ title: title, content: content });
+        articles.push({ id: id, title: title, content: content });
         localStorage.setItem('articles', JSON.stringify(articles));
     }
 
     function loadArticles() {
         var articles = JSON.parse(localStorage.getItem('articles')) || [];
         articles.forEach(function(article) {
-            addArticle(article.title, article.content);
+            addArticle(article.title, article.content, article.id);
         });
     }
+
+    function deleteArticle(id, articleElement) {
+        var articles = JSON.parse(localStorage.getItem('articles'));
+        var filteredArticles = articles.filter(function(article) {
+            return article.id.toString() !== id;
+        });
+        localStorage.setItem('articles', JSON.stringify(filteredArticles));
+        articleElement.remove(); // Remove the article from the DOM
+    }
 </script>
+
 
