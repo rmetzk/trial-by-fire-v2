@@ -21,34 +21,42 @@
 </section>
 
 <section id="create-new-blog-articles">
-    <form id="articleForm">
-        <div class="form-group">
-            <label for="title">Artcle Title:</label>
-            <input type="text" id="title" name="title" required> 
-        </div>
-        <div class="form-group">
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" required></textarea>
-        </div>
-        <button type="submit">Submit</button>          
+<form>
+    <label for="title">Title:</label>
+    <input type="text" id="title">
+    
+    <label for="content">Content:</label>
+    <textarea id="content"></textarea>
+    
+    <button type="submit">Submit</button>
     </form>
-</section>
-
-<div id="article"></div>
-
-<script>
-    const form = document.getElementById('articleForm');
-    const article = document.getElementById('article');
+    
+    <div id="articles">
+    <h2>Articles</h2>
+    
+    <!-- Existing Articles -->
+    
+    </div>
+    
+    <script>
+    const form = document.querySelector('form');
+    const articles = document.getElementById('articles');
     
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    e.preventDefault();
     
-      const title = form.title.value; 
-      const content = form.content.value;
+    const title = form.title.value;
+    const content = form.content.value;
     
-      article.innerHTML = `
-        <h1>${title}</h1>
+    const article = document.createElement('div');
+    article.innerHTML = `
+        <h3>${title}</h3>
         <p>${content}</p>
-      `;
+    `;
+    
+    articles.appendChild(article);
+    
+    form.reset();
     });
     </script>
+</section>
