@@ -4,20 +4,34 @@
     }
 </stylle>
 
-<h1 class = "red-heading">Foo Page</h1>
+<h1 class = "red-heading">My Blog</h1>
 
-<div>
-    <h2 class="red-heading">Bar Section</h2>
-    <p>Foo, bar, and BAz are random nonsense words that developers often use to create code examples</p>
-</div>
-
+<section id="blog-articles">
 <article>
-    <h2 class="red-heading">Baz Section</h2>
+    <h2 class="red-heading">Explaining Foo, bar, baz, and lorem ipsum</h2>
+    <p>Foo, bar, and baz are random nonsense words that developers often use to create code examples</p>
+
     <p>Another common pattern, or ideom, is the concept of "Lorem Ipsum text"
 
         Read more on Lorem Ipsum <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="blank">
             here on Wikipedia!
         </a>
-
     </p>
 </article>
+</section>
+
+<section id="create-new-blog-articles">
+    <form id="new-article-form">
+            <div>
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title"> 
+            </div>
+            
+            <div>
+              <label for="content">Content:</label>
+              <textarea id="content" name="content"></textarea>
+            </div>
+          
+            <button type="submit">Submit</button>          
+    </form>
+</section>
