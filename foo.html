@@ -33,3 +33,20 @@
         <button type="submit">Submit</button>          
     </form>
 </section>
+
+<script>
+    const form = document.getElementById('articleForm');
+    const article = document.getElementById('article');
+    
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    
+      const title = form.title.value; 
+      const content = form.content.value;
+    
+      article.innerHTML = `
+        <h1>${title}</h1>
+        <p>${content}</p>
+      `;
+    });
+    </script>
